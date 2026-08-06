@@ -19,13 +19,21 @@ confidence. This isolates exactly what confidence-awareness buys, holding
 everything else (the same three per-modality scorers, the same
 distributions) constant.
 """
+# Historical default for the equipment-maintenance-triage domain; kept
+# for backward-compat imports (`from framework.fusion import LABELS`) but
+# no longer used internally. _weighted_sum infers the label set from the
+# modality results themselves (their probs dict keys), not from this
+# constant, specifically so fusion works unchanged for any label set --
+# e.g. the second (IT-incident) task domain's minor/degraded/outage
+# labels -- rather than silently breaking on a hardcoded class list.
 LABELS = ["normal", "warning", "critical"]
 
 
 def _weighted_sum(modality_results, weights):
-    fused = {l: 0.0 for l in LABELS}
+    labels = list(modality_results[0]["probs"].keys())
+    fused = {l: 0.0 for l in labels}
     for res, w in zip(modality_results, weights):
-        for l in LABELS:
+        for l in labels:
             fused[l] += w * res["probs"][l]
     best_label = max(fused, key=fused.get)
     return {"label": best_label, "probs": fused, "weights": dict(zip(

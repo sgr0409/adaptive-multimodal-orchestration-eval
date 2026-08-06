@@ -6,7 +6,7 @@
     "device": "cpu",
     "seed": 42,
     "bootstrap_resamples": 2000,
-    "total_runtime_s": 39.2
+    "total_runtime_s": 42.3
   },
   "dataset": {
     "n_total": 1500,
@@ -141,102 +141,132 @@
   },
   "latency": {
     "note": "per-example latency for scoring all three modalities and computing both fusion variants (single-threaded, CPU); planner/tool execution not included (negligible, no model inference).",
-    "mean_ms": 36.045,
-    "p50_ms": 35.62,
-    "p95_ms": 39.014,
-    "p99_ms": 45.526,
+    "mean_ms": 39.5,
+    "p50_ms": 39.328,
+    "p95_ms": 41.688,
+    "p99_ms": 43.92,
     "n": 750
   },
   "planner_smoke_test": [
     {
       "id": 77,
       "fused_label": "critical",
+      "strategy": "direct",
       "action": "immediate_shutdown",
-      "tool_call": {
-        "tool": "escalate_and_shutdown",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "escalate_and_shutdown",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 1376,
       "fused_label": "critical",
+      "strategy": "direct",
       "action": "immediate_shutdown",
-      "tool_call": {
-        "tool": "escalate_and_shutdown",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "escalate_and_shutdown",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 1351,
       "fused_label": "warning",
+      "strategy": "direct",
       "action": "schedule_maintenance",
-      "tool_call": {
-        "tool": "open_maintenance_ticket",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "open_maintenance_ticket",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 406,
       "fused_label": "warning",
+      "strategy": "direct",
       "action": "schedule_maintenance",
-      "tool_call": {
-        "tool": "open_maintenance_ticket",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "open_maintenance_ticket",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 384,
       "fused_label": "normal",
+      "strategy": "direct",
       "action": "monitor",
-      "tool_call": {
-        "tool": "log_and_monitor",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 693,
       "fused_label": "warning",
+      "strategy": "direct",
       "action": "schedule_maintenance",
-      "tool_call": {
-        "tool": "open_maintenance_ticket",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "open_maintenance_ticket",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 857,
       "fused_label": "warning",
+      "strategy": "direct",
       "action": "schedule_maintenance",
-      "tool_call": {
-        "tool": "open_maintenance_ticket",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "open_maintenance_ticket",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 319,
       "fused_label": "normal",
+      "strategy": "direct",
       "action": "monitor",
-      "tool_call": {
-        "tool": "log_and_monitor",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 26,
       "fused_label": "normal",
+      "strategy": "direct",
       "action": "monitor",
-      "tool_call": {
-        "tool": "log_and_monitor",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
     },
     {
       "id": 1433,
       "fused_label": "normal",
+      "strategy": "direct",
       "action": "monitor",
-      "tool_call": {
-        "tool": "log_and_monitor",
-        "status": "ok"
-      }
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "n_test": 750,
+  "langgraph_fixed_flow_accuracy": 0.9667,
+  "internal_equal_weight_baseline_accuracy": 0.9667,
+  "internal_confidence_weighted_accuracy": 0.98,
+  "langgraph_vs_internal_equal_weight_mcnemar": {
+    "b": 0,
+    "c": 0,
+    "p_value": 1.0
+  },
+  "langgraph_vs_internal_confidence_weighted_mcnemar": {
+    "b": 6,
+    "c": 16,
+    "p_value": 0.052479
+  },
+  "langgraph_total_runtime_s": 27.33,
+  "langgraph_version": "0.6.11"
+}

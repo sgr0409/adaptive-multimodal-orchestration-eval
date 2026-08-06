@@ -23,7 +23,7 @@ from framework.text_scorer import TextScorer
 from framework.telemetry_scorer import TelemetryScorer
 from framework.image_scorer import ImageScorer
 from framework.fusion import confidence_weighted_fusion, equal_weight_fusion, LABELS
-from framework.planner import Planner
+from framework.planner import FixedPlanner
 
 SEED = 42
 DATA_DIR = ROOT / "data"
@@ -206,7 +206,7 @@ def main():
     # Exercise the planner end-to-end on a handful of test examples as a
     # smoke test that the full pipeline (fusion -> action -> mock tool
     # call) actually runs, not just the classification metrics.
-    planner = Planner()
+    planner = FixedPlanner()
     planner_log = []
     for e in per_example[:10]:
         out = planner.plan_and_execute(e["confidence_weighted_fusion"]["label"], e["id"])
