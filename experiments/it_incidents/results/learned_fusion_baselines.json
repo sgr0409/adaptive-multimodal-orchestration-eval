@@ -1,0 +1,42 @@
+{
+  "n_test": 750,
+  "n_hard_subset": 374,
+  "n_folds": 5,
+  "overall_accuracy": {
+    "equal_weight": 0.976,
+    "confidence_weighted": 0.9773,
+    "stacking": 0.9987,
+    "gating": 1.0
+  },
+  "hard_subset_accuracy": {
+    "equal_weight": 0.9519,
+    "confidence_weighted": 0.9545,
+    "stacking": 0.9973,
+    "gating": 1.0
+  },
+  "hard_subset_mcnemar_vs_confidence_weighted": {
+    "stacking": {
+      "b": 16,
+      "c": 0,
+      "p_value": 3.1e-05
+    },
+    "learned_gating": {
+      "b": 17,
+      "c": 0,
+      "p_value": 1.5e-05
+    }
+  },
+  "overall_mcnemar_vs_confidence_weighted": {
+    "stacking": {
+      "b": 16,
+      "c": 0,
+      "p_value": 3.1e-05
+    },
+    "learned_gating": {
+      "b": 17,
+      "c": 0,
+      "p_value": 1.5e-05
+    }
+  },
+  "note": "McNemar b = new-method-right/CW-wrong, c = new-method-wrong/CW-right."
+}
