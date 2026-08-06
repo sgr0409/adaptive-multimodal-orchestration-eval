@@ -1,0 +1,48 @@
+{
+  "n_hard_subset": 374,
+  "equal_weight_accuracy_on_hard_subset": 0.9519,
+  "sweep": {
+    "1": {
+      "accuracy": 0.9626,
+      "mcnemar_vs_equal_weight": {
+        "b": 8,
+        "c": 4,
+        "p_value": 0.387695
+      }
+    },
+    "2": {
+      "accuracy": 0.9572,
+      "mcnemar_vs_equal_weight": {
+        "b": 8,
+        "c": 6,
+        "p_value": 0.790527
+      }
+    },
+    "3": {
+      "accuracy": 0.9545,
+      "mcnemar_vs_equal_weight": {
+        "b": 9,
+        "c": 8,
+        "p_value": 1.0
+      }
+    },
+    "4": {
+      "accuracy": 0.9545,
+      "mcnemar_vs_equal_weight": {
+        "b": 9,
+        "c": 8,
+        "p_value": 1.0
+      }
+    },
+    "5": {
+      "accuracy": 0.9545,
+      "mcnemar_vs_equal_weight": {
+        "b": 9,
+        "c": 8,
+        "p_value": 1.0
+      }
+    }
+  },
+  "deployed_power": 3,
+  "note": "power=3 is kept as the deployed default for consistency with domain 1's chosen value; this sweep checks whether that choice still makes sense on a second, independently-generated domain rather than re-tuning per domain."
+}

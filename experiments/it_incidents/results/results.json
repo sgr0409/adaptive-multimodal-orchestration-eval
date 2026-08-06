@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "platform": "macOS-14.6-arm64-arm-64bit",
+    "python": "3.9.6 (default, Nov 11 2024, 03:15:38) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+    "torch": "2.8.0",
+    "device": "cpu",
+    "seed": 42,
+    "bootstrap_resamples": 2000,
+    "domain": "it_incidents",
+    "total_runtime_s": 42.0
+  },
+  "dataset": {
+    "n_total": 1500,
+    "n_train": 750,
+    "n_test": 750
+  },
+  "confidence_weighted_fusion": {
+    "accuracy": 0.9773,
+    "macro_precision": 0.9775,
+    "macro_recall": 0.9777,
+    "macro_f1": 0.9774,
+    "confusion_matrix": [
+      [
+        240,
+        1,
+        4
+      ],
+      [
+        2,
+        251,
+        8
+      ],
+      [
+        1,
+        1,
+        242
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "minor",
+      "degraded",
+      "outage"
+    ],
+    "bootstrap_accuracy_ci": {
+      "lo95": 0.9653,
+      "hi95": 0.988
+    }
+  },
+  "equal_weight_fusion": {
+    "accuracy": 0.976,
+    "macro_precision": 0.9762,
+    "macro_recall": 0.9763,
+    "macro_f1": 0.976,
+    "confusion_matrix": [
+      [
+        238,
+        2,
+        5
+      ],
+      [
+        3,
+        251,
+        7
+      ],
+      [
+        0,
+        1,
+        243
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "minor",
+      "degraded",
+      "outage"
+    ],
+    "bootstrap_accuracy_ci": {
+      "lo95": 0.9653,
+      "hi95": 0.9867
+    }
+  },
+  "significance": {
+    "confidence_weighted_vs_equal_weight_mcnemar": {
+      "b_a_right_b_wrong": 9,
+      "c_a_wrong_b_right": 8,
+      "p_value": 1.0
+    },
+    "note": "exact (binomial) McNemar's test on paired test-set predictions."
+  },
+  "subset_breakdown": {
+    "0_degraded_modalities": {
+      "n": 147,
+      "confidence_weighted_accuracy": 1.0,
+      "equal_weight_accuracy": 1.0,
+      "mcnemar": {
+        "b_a_right_b_wrong": 0,
+        "c_a_wrong_b_right": 0,
+        "p_value": 1.0
+      }
+    },
+    "1_degraded_modalities": {
+      "n": 229,
+      "confidence_weighted_accuracy": 1.0,
+      "equal_weight_accuracy": 1.0,
+      "mcnemar": {
+        "b_a_right_b_wrong": 0,
+        "c_a_wrong_b_right": 0,
+        "p_value": 1.0
+      }
+    },
+    "2_degraded_modalities": {
+      "n": 374,
+      "confidence_weighted_accuracy": 0.9545,
+      "equal_weight_accuracy": 0.9519,
+      "mcnemar": {
+        "b_a_right_b_wrong": 9,
+        "c_a_wrong_b_right": 8,
+        "p_value": 1.0
+      }
+    }
+  },
+  "per_modality_standalone_accuracy": {
+    "text": 0.6973,
+    "image": 0.7253,
+    "telemetry": 0.7187
+  },
+  "modality_confidence_reliability_check": {
+    "text": {
+      "mean_confidence_when_degraded": 0.3644,
+      "mean_confidence_when_not_degraded": 0.9994,
+      "n_degraded": 340
+    },
+    "image": {
+      "mean_confidence_when_degraded": 0.7585,
+      "mean_confidence_when_not_degraded": 0.9994,
+      "n_degraded": 320
+    },
+    "telemetry": {
+      "mean_confidence_when_degraded": 0.491,
+      "mean_confidence_when_not_degraded": 0.9718,
+      "n_degraded": 317
+    }
+  },
+  "latency": {
+    "mean_ms": 39.049,
+    "p50_ms": 38.922,
+    "p95_ms": 41.44,
+    "p99_ms": 43.186,
+    "n": 750
+  },
+  "planner_smoke_test": [
+    {
+      "id": 77,
+      "fused_label": "outage",
+      "strategy": "direct",
+      "action": "page_oncall",
+      "tool_calls": [
+        {
+          "tool": "page_oncall_engineer",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 1376,
+      "fused_label": "outage",
+      "strategy": "direct",
+      "action": "page_oncall",
+      "tool_calls": [
+        {
+          "tool": "page_oncall_engineer",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 1351,
+      "fused_label": "degraded",
+      "strategy": "direct",
+      "action": "investigate",
+      "tool_calls": [
+        {
+          "tool": "open_incident_ticket",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 406,
+      "fused_label": "degraded",
+      "strategy": "direct",
+      "action": "investigate",
+      "tool_calls": [
+        {
+          "tool": "open_incident_ticket",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 384,
+      "fused_label": "minor",
+      "strategy": "direct",
+      "action": "monitor",
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 693,
+      "fused_label": "degraded",
+      "strategy": "direct",
+      "action": "investigate",
+      "tool_calls": [
+        {
+          "tool": "open_incident_ticket",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 857,
+      "fused_label": "degraded",
+      "strategy": "direct",
+      "action": "investigate",
+      "tool_calls": [
+        {
+          "tool": "open_incident_ticket",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 319,
+      "fused_label": "minor",
+      "strategy": "direct",
+      "action": "monitor",
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "fused_label": "minor",
+      "strategy": "direct",
+      "action": "monitor",
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": 1433,
+      "fused_label": "minor",
+      "strategy": "direct",
+      "action": "monitor",
+      "tool_calls": [
+        {
+          "tool": "log_and_monitor",
+          "status": "ok"
+        }
+      ]
+    }
+  ]
+}
