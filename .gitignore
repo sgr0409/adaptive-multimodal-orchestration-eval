@@ -4,3 +4,11 @@ __pycache__/
 .DS_Store
 .idea/
 .claude/
+
+# Third-party CrisisMMD photos (CC BY-NC-SA 4.0, Alam et al. 2018) are
+# fetched by data_public_crisismmd/download_dataset.py, not redistributed
+# in this repo -- too large (~650MB) and not ours to republish. The code
+# to regenerate them, and the resulting text/label metadata and analysis
+# results, are committed as normal.
+data_public_crisismmd/images/
+data_public_crisismmd/images_degraded/

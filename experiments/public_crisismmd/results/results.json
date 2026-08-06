@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "seed": 42,
+    "n_folds": 5,
+    "n_bootstrap": 2000,
+    "domain": "public_crisismmd",
+    "dataset_size": 2986
+  },
+  "dataset": {
+    "n_total": 2986,
+    "n_train": 1493,
+    "n_test": 1493,
+    "n_hard_subset": 1063
+  },
+  "equal_weight": {
+    "overall": {
+      "accuracy": 0.6135,
+      "macro_f1": 0.4757,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5901,
+        "hi95": 0.6383
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.5945,
+      "macro_f1": 0.46,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5654,
+        "hi95": 0.6246
+      }
+    }
+  },
+  "confidence_weighted": {
+    "overall": {
+      "accuracy": 0.6175,
+      "macro_f1": 0.4797,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5934,
+        "hi95": 0.6423
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.6002,
+      "macro_f1": 0.467,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.571,
+        "hi95": 0.6303
+      }
+    }
+  },
+  "stacking": {
+    "overall": {
+      "accuracy": 0.5747,
+      "macro_f1": 0.471,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5499,
+        "hi95": 0.6001
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.5484,
+      "macro_f1": 0.4556,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5183,
+        "hi95": 0.5795
+      }
+    }
+  },
+  "gating": {
+    "overall": {
+      "accuracy": 0.5707,
+      "macro_f1": 0.4423,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5452,
+        "hi95": 0.5968
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.556,
+      "macro_f1": 0.4346,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.5268,
+        "hi95": 0.5889
+      }
+    }
+  },
+  "significance_vs_equal_weight": {
+    "confidence_weighted": {
+      "overall": {
+        "b": 14,
+        "c": 8,
+        "p_value": 0.286279
+      },
+      "hard_subset": {
+        "b": 13,
+        "c": 7,
+        "p_value": 0.263176
+      }
+    },
+    "stacking": {
+      "overall": {
+        "b": 71,
+        "c": 129,
+        "p_value": 5e-05
+      },
+      "hard_subset": {
+        "b": 55,
+        "c": 104,
+        "p_value": 0.000126
+      }
+    },
+    "gating": {
+      "overall": {
+        "b": 112,
+        "c": 176,
+        "p_value": 0.000194
+      },
+      "hard_subset": {
+        "b": 91,
+        "c": 132,
+        "p_value": 0.007256
+      }
+    }
+  },
+  "significance_vs_confidence_weighted": {
+    "stacking": {
+      "overall": {
+        "b": 69,
+        "c": 133,
+        "p_value": 8e-06
+      },
+      "hard_subset": {
+        "b": 52,
+        "c": 107,
+        "p_value": 1.5e-05
+      }
+    },
+    "gating": {
+      "overall": {
+        "b": 118,
+        "c": 188,
+        "p_value": 7.5e-05
+      },
+      "hard_subset": {
+        "b": 96,
+        "c": 143,
+        "p_value": 0.002847
+      }
+    }
+  },
+  "modality_confidence_reliability_check": {
+    "text": {
+      "mean_confidence_when_degraded": 0.815,
+      "mean_confidence_when_not_degraded": 0.8041,
+      "n_degraded": 494
+    },
+    "image": {
+      "mean_confidence_when_degraded": 0.8262,
+      "mean_confidence_when_not_degraded": 0.9214,
+      "n_degraded": 569
+    }
+  },
+  "confidence_weighted_confusion_matrix": [
+    [
+      68,
+      55,
+      71
+    ],
+    [
+      70,
+      105,
+      182
+    ],
+    [
+      64,
+      129,
+      749
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "little_or_no_damage",
+    "mild_damage",
+    "severe_damage"
+  ]
+}

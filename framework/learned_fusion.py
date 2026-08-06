@@ -47,7 +47,8 @@ def _confidence_features(modality_results):
 
 class StackingFusion:
     def __init__(self):
-        self.clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=42))
+        self.clf = make_pipeline(StandardScaler(),
+                                  LogisticRegression(max_iter=1000, random_state=42, class_weight="balanced"))
         self.labels_ = None
         self._fitted = False
 
@@ -100,9 +101,17 @@ class LearnedGatingFusion:
                                         for mr in oof_modality_results_list]), dtype=torch.float32)
         y_idx = torch.tensor([label_to_idx[l] for l in y], dtype=torch.long)
 
+        # Inverse-frequency class weights, same rebalancing sklearn's
+        # class_weight="balanced" applies to StackingFusion -- a no-op on
+        # this paper's two balanced synthetic domains, but necessary on
+        # class-imbalanced real data (e.g. the public CrisisMMD domain) to
+        # stop the loss from being dominated by the majority class.
+        counts = torch.bincount(y_idx, minlength=len(self.labels_)).float()
+        class_weights = counts.sum() / (len(self.labels_) * counts.clamp(min=1))
+
         self.model = _GateNet(n_modalities=conf.shape[1])
         opt = torch.optim.Adam(self.model.parameters(), lr=self.lr)
-        loss_fn = nn.NLLLoss()
+        loss_fn = nn.NLLLoss(weight=class_weights)
         for _ in range(self.epochs):
             opt.zero_grad()
             weights = self.model(conf)
