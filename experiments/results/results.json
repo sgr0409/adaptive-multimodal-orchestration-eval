@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "platform": "macOS-14.6-arm64-arm-64bit",
+    "python": "3.9.6 (default, Nov 11 2024, 03:15:38) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+    "torch": "2.8.0",
+    "device": "cpu",
+    "seed": 42,
+    "bootstrap_resamples": 2000,
+    "total_runtime_s": 39.2
+  },
+  "dataset": {
+    "n_total": 1500,
+    "n_train": 750,
+    "n_test": 750
+  },
+  "confidence_weighted_fusion": {
+    "accuracy": 0.98,
+    "macro_precision": 0.9802,
+    "macro_recall": 0.9806,
+    "macro_f1": 0.9801,
+    "confusion_matrix": [
+      [
+        243,
+        1,
+        1
+      ],
+      [
+        2,
+        249,
+        10
+      ],
+      [
+        0,
+        1,
+        243
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "normal",
+      "warning",
+      "critical"
+    ],
+    "bootstrap_accuracy_ci": {
+      "lo95": 0.9693,
+      "hi95": 0.9893
+    }
+  },
+  "equal_weight_fusion": {
+    "accuracy": 0.9667,
+    "macro_precision": 0.9667,
+    "macro_recall": 0.9672,
+    "macro_f1": 0.9667,
+    "confusion_matrix": [
+      [
+        241,
+        1,
+        3
+      ],
+      [
+        4,
+        246,
+        11
+      ],
+      [
+        3,
+        3,
+        238
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "normal",
+      "warning",
+      "critical"
+    ],
+    "bootstrap_accuracy_ci": {
+      "lo95": 0.9533,
+      "hi95": 0.9787
+    }
+  },
+  "significance": {
+    "confidence_weighted_vs_equal_weight_mcnemar": {
+      "b_a_right_b_wrong": 16,
+      "c_a_wrong_b_right": 6,
+      "p_value": 0.052479
+    },
+    "note": "exact (binomial) McNemar's test on paired test-set predictions."
+  },
+  "subset_breakdown": {
+    "0_degraded_modalities": {
+      "n": 147,
+      "confidence_weighted_accuracy": 1.0,
+      "equal_weight_accuracy": 1.0,
+      "mcnemar": {
+        "b_a_right_b_wrong": 0,
+        "c_a_wrong_b_right": 0,
+        "p_value": 1.0
+      }
+    },
+    "1_degraded_modalities": {
+      "n": 229,
+      "confidence_weighted_accuracy": 1.0,
+      "equal_weight_accuracy": 1.0,
+      "mcnemar": {
+        "b_a_right_b_wrong": 0,
+        "c_a_wrong_b_right": 0,
+        "p_value": 1.0
+      }
+    },
+    "2_degraded_modalities": {
+      "n": 374,
+      "confidence_weighted_accuracy": 0.9599,
+      "equal_weight_accuracy": 0.9332,
+      "mcnemar": {
+        "b_a_right_b_wrong": 16,
+        "c_a_wrong_b_right": 6,
+        "p_value": 0.052479
+      }
+    }
+  },
+  "per_modality_standalone_accuracy": {
+    "text": 0.6973,
+    "image": 0.7053,
+    "telemetry": 0.7147
+  },
+  "modality_confidence_reliability_check": {
+    "text": {
+      "mean_confidence_when_degraded": 0.3643,
+      "mean_confidence_when_not_degraded": 0.9995,
+      "n_degraded": 340
+    },
+    "image": {
+      "mean_confidence_when_degraded": 0.7681,
+      "mean_confidence_when_not_degraded": 0.9964,
+      "n_degraded": 320
+    },
+    "telemetry": {
+      "mean_confidence_when_degraded": 0.4962,
+      "mean_confidence_when_not_degraded": 0.9692,
+      "n_degraded": 317
+    }
+  },
+  "latency": {
+    "note": "per-example latency for scoring all three modalities and computing both fusion variants (single-threaded, CPU); planner/tool execution not included (negligible, no model inference).",
+    "mean_ms": 36.045,
+    "p50_ms": 35.62,
+    "p95_ms": 39.014,
+    "p99_ms": 45.526,
+    "n": 750
+  },
+  "planner_smoke_test": [
+    {
+      "id": 77,
+      "fused_label": "critical",
+      "action": "immediate_shutdown",
+      "tool_call": {
+        "tool": "escalate_and_shutdown",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 1376,
+      "fused_label": "critical",
+      "action": "immediate_shutdown",
+      "tool_call": {
+        "tool": "escalate_and_shutdown",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 1351,
+      "fused_label": "warning",
+      "action": "schedule_maintenance",
+      "tool_call": {
+        "tool": "open_maintenance_ticket",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 406,
+      "fused_label": "warning",
+      "action": "schedule_maintenance",
+      "tool_call": {
+        "tool": "open_maintenance_ticket",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 384,
+      "fused_label": "normal",
+      "action": "monitor",
+      "tool_call": {
+        "tool": "log_and_monitor",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 693,
+      "fused_label": "warning",
+      "action": "schedule_maintenance",
+      "tool_call": {
+        "tool": "open_maintenance_ticket",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 857,
+      "fused_label": "warning",
+      "action": "schedule_maintenance",
+      "tool_call": {
+        "tool": "open_maintenance_ticket",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 319,
+      "fused_label": "normal",
+      "action": "monitor",
+      "tool_call": {
+        "tool": "log_and_monitor",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 26,
+      "fused_label": "normal",
+      "action": "monitor",
+      "tool_call": {
+        "tool": "log_and_monitor",
+        "status": "ok"
+      }
+    },
+    {
+      "id": 1433,
+      "fused_label": "normal",
+      "action": "monitor",
+      "tool_call": {
+        "tool": "log_and_monitor",
+        "status": "ok"
+      }
+    }
+  ]
+}

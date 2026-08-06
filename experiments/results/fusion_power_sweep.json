@@ -1,0 +1,48 @@
+{
+  "n_hard_subset": 374,
+  "equal_weight_accuracy_on_hard_subset": 0.9332,
+  "sweep": {
+    "1": {
+      "accuracy": 0.9439,
+      "mcnemar_vs_equal_weight": {
+        "b": 9,
+        "c": 5,
+        "p_value": 0.42395
+      }
+    },
+    "2": {
+      "accuracy": 0.9519,
+      "mcnemar_vs_equal_weight": {
+        "b": 12,
+        "c": 5,
+        "p_value": 0.143463
+      }
+    },
+    "3": {
+      "accuracy": 0.9599,
+      "mcnemar_vs_equal_weight": {
+        "b": 16,
+        "c": 6,
+        "p_value": 0.052479
+      }
+    },
+    "4": {
+      "accuracy": 0.9599,
+      "mcnemar_vs_equal_weight": {
+        "b": 16,
+        "c": 6,
+        "p_value": 0.052479
+      }
+    },
+    "5": {
+      "accuracy": 0.9599,
+      "mcnemar_vs_equal_weight": {
+        "b": 16,
+        "c": 6,
+        "p_value": 0.052479
+      }
+    }
+  },
+  "deployed_power": 3,
+  "note": "power=3 is deployed because it is the plateau point: power=4 and power=5 produce identical predictions to power=3 on this subset, since large powers converge to an effective argmax-confidence rule. Not chosen by tuning until significant -- the sweep is reported in full, including that p=0.0525 at power=3 is just above the conventional 0.05 threshold, not below it."
+}

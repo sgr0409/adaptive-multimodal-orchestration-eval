@@ -1,0 +1,37 @@
+{
+  "n_test": 750,
+  "fixed_planner_accuracy": 0.98,
+  "dynamic_planner_accuracy": 0.9773,
+  "mcnemar": {
+    "b_fixed_right_dynamic_wrong": 2,
+    "c_fixed_wrong_dynamic_right": 0,
+    "p_value": 0.5
+  },
+  "strategy_selection_counts": {
+    "direct": 163,
+    "verification": 333,
+    "escalation": 254
+  },
+  "n_overrides": 2,
+  "overrides_that_recovered_a_fusion_error": 0,
+  "overrides_on_already_wrong_fusion_that_stayed_wrong": 0,
+  "overrides_that_broke_a_correct_fusion_decision": 2,
+  "override_examples": [
+    {
+      "id": 180,
+      "true_label": "normal",
+      "fused_label": "normal",
+      "final_label": "warning",
+      "fusion_was_wrong": false,
+      "override_was_correct": false
+    },
+    {
+      "id": 1320,
+      "true_label": "warning",
+      "fused_label": "warning",
+      "final_label": "critical",
+      "fusion_was_wrong": false,
+      "override_was_correct": false
+    }
+  ]
+}
