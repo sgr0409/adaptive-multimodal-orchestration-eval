@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "purpose": "Isolates whether the CrisisMMD reversal is caused by real-vs-synthetic data or by the modality-count reduction (3->2), by re-running the confidence-weighted-vs-equal-weight comparison on domain one's own SYNTHETIC data restricted to text+image only, with CrisisMMD's at-most-one-of-two-degraded structure.",
+    "n_scenarios_kept": 590,
+    "n_scenarios_total_domain_one": 1500,
+    "seed": 42,
+    "n_seeds_robustness": 30
+  },
+  "single_split": {
+    "n_test": 295,
+    "n_hard_subset": 160,
+    "overall_accuracy": {
+      "equal_weight": 0.9898,
+      "confidence_weighted": 0.9898
+    },
+    "hard_subset_accuracy": {
+      "equal_weight": 0.9812,
+      "confidence_weighted": 0.9812
+    },
+    "overall_mcnemar": {
+      "b": 0,
+      "c": 0,
+      "p_value": 1.0
+    },
+    "hard_subset_mcnemar": {
+      "b": 0,
+      "c": 0,
+      "p_value": 1.0
+    },
+    "overall_bootstrap_ci": {
+      "equal_weight": {
+        "lo95": 0.9763,
+        "hi95": 1.0
+      },
+      "confidence_weighted": {
+        "lo95": 0.9763,
+        "hi95": 1.0
+      }
+    }
+  },
+  "robustness_multiseed": {
+    "n_seeds": 30,
+    "per_seed": [
+      {
+        "seed": 0,
+        "n_hard": 149,
+        "ew_acc_hard": 0.9732,
+        "cw_acc_hard": 0.9799,
+        "mcnemar_b": 1,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 1,
+        "n_hard": 163,
+        "ew_acc_hard": 0.9939,
+        "cw_acc_hard": 0.9939,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 2,
+        "n_hard": 162,
+        "ew_acc_hard": 0.9938,
+        "cw_acc_hard": 0.9938,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 3,
+        "n_hard": 158,
+        "ew_acc_hard": 0.9937,
+        "cw_acc_hard": 0.9937,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 4,
+        "n_hard": 144,
+        "ew_acc_hard": 0.9792,
+        "cw_acc_hard": 0.9792,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 5,
+        "n_hard": 141,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 6,
+        "n_hard": 149,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 7,
+        "n_hard": 142,
+        "ew_acc_hard": 0.9789,
+        "cw_acc_hard": 0.9789,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 8,
+        "n_hard": 148,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 9,
+        "n_hard": 145,
+        "ew_acc_hard": 0.9931,
+        "cw_acc_hard": 0.9931,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 10,
+        "n_hard": 156,
+        "ew_acc_hard": 0.9936,
+        "cw_acc_hard": 0.9936,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 11,
+        "n_hard": 156,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 12,
+        "n_hard": 165,
+        "ew_acc_hard": 0.9939,
+        "cw_acc_hard": 0.9939,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 13,
+        "n_hard": 145,
+        "ew_acc_hard": 0.9793,
+        "cw_acc_hard": 0.9793,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 14,
+        "n_hard": 142,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 15,
+        "n_hard": 145,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 16,
+        "n_hard": 161,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 17,
+        "n_hard": 150,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 18,
+        "n_hard": 154,
+        "ew_acc_hard": 0.9805,
+        "cw_acc_hard": 0.9805,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 19,
+        "n_hard": 153,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 20,
+        "n_hard": 147,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 21,
+        "n_hard": 150,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 0.9933,
+        "mcnemar_b": 0,
+        "mcnemar_c": 1,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 22,
+        "n_hard": 144,
+        "ew_acc_hard": 0.9931,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 1,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 23,
+        "n_hard": 145,
+        "ew_acc_hard": 0.9793,
+        "cw_acc_hard": 0.9793,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 24,
+        "n_hard": 152,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 25,
+        "n_hard": 145,
+        "ew_acc_hard": 0.9931,
+        "cw_acc_hard": 0.9931,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 26,
+        "n_hard": 156,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 27,
+        "n_hard": 152,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 28,
+        "n_hard": 147,
+        "ew_acc_hard": 1.0,
+        "cw_acc_hard": 1.0,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      },
+      {
+        "seed": 29,
+        "n_hard": 149,
+        "ew_acc_hard": 0.9732,
+        "cw_acc_hard": 0.9732,
+        "mcnemar_b": 0,
+        "mcnemar_c": 0,
+        "mcnemar_p": 1.0
+      }
+    ],
+    "mean_gap_hard_subset": 0.0002,
+    "std_gap_hard_subset": 0.0021,
+    "n_seeds_favoring_confidence_weighted": 2,
+    "n_seeds_favoring_equal_weight": 1,
+    "n_seeds_tied": 27,
+    "pooled_mcnemar": {
+      "b": 2,
+      "c": 1,
+      "p_value": 1.0
+    },
+    "wilcoxon": {
+      "statistic": 1.5,
+      "p_value": 0.414216
+    }
+  }
+}
