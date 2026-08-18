@@ -1,0 +1,458 @@
+{
+  "domain_one_maintenance": {
+    "domain": "domain_one_maintenance",
+    "n_seeds": 30,
+    "per_seed": [
+      {
+        "seed": 0,
+        "n_hard": 374,
+        "ew_acc_hard": 0.9091,
+        "cw_acc_hard": 0.9572,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 1,
+        "n_hard": 387,
+        "ew_acc_hard": 0.8992,
+        "cw_acc_hard": 0.9483,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 2,
+        "n_hard": 375,
+        "ew_acc_hard": 0.88,
+        "cw_acc_hard": 0.9173,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 3,
+        "n_hard": 368,
+        "ew_acc_hard": 0.8832,
+        "cw_acc_hard": 0.9348,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 4,
+        "n_hard": 381,
+        "ew_acc_hard": 0.9029,
+        "cw_acc_hard": 0.9606,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 5,
+        "n_hard": 374,
+        "ew_acc_hard": 0.9011,
+        "cw_acc_hard": 0.9492,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 6,
+        "n_hard": 375,
+        "ew_acc_hard": 0.9013,
+        "cw_acc_hard": 0.952,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 7,
+        "n_hard": 383,
+        "ew_acc_hard": 0.9008,
+        "cw_acc_hard": 0.9661,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 8,
+        "n_hard": 375,
+        "ew_acc_hard": 0.88,
+        "cw_acc_hard": 0.9413,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 9,
+        "n_hard": 380,
+        "ew_acc_hard": 0.9184,
+        "cw_acc_hard": 0.9526,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 10,
+        "n_hard": 382,
+        "ew_acc_hard": 0.9241,
+        "cw_acc_hard": 0.9476,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 11,
+        "n_hard": 369,
+        "ew_acc_hard": 0.9133,
+        "cw_acc_hard": 0.9621,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 12,
+        "n_hard": 376,
+        "ew_acc_hard": 0.8963,
+        "cw_acc_hard": 0.9255,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 13,
+        "n_hard": 360,
+        "ew_acc_hard": 0.9056,
+        "cw_acc_hard": 0.9361,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 14,
+        "n_hard": 372,
+        "ew_acc_hard": 0.9301,
+        "cw_acc_hard": 0.9462,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 15,
+        "n_hard": 374,
+        "ew_acc_hard": 0.8824,
+        "cw_acc_hard": 0.9519,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 16,
+        "n_hard": 376,
+        "ew_acc_hard": 0.9122,
+        "cw_acc_hard": 0.9415,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 17,
+        "n_hard": 349,
+        "ew_acc_hard": 0.9226,
+        "cw_acc_hard": 0.9542,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 18,
+        "n_hard": 375,
+        "ew_acc_hard": 0.9093,
+        "cw_acc_hard": 0.944,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 19,
+        "n_hard": 368,
+        "ew_acc_hard": 0.8995,
+        "cw_acc_hard": 0.9484,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 20,
+        "n_hard": 389,
+        "ew_acc_hard": 0.874,
+        "cw_acc_hard": 0.9254,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 21,
+        "n_hard": 380,
+        "ew_acc_hard": 0.9132,
+        "cw_acc_hard": 0.9526,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 22,
+        "n_hard": 355,
+        "ew_acc_hard": 0.9183,
+        "cw_acc_hard": 0.9465,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 23,
+        "n_hard": 373,
+        "ew_acc_hard": 0.9088,
+        "cw_acc_hard": 0.9517,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 24,
+        "n_hard": 376,
+        "ew_acc_hard": 0.8883,
+        "cw_acc_hard": 0.9309,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 25,
+        "n_hard": 368,
+        "ew_acc_hard": 0.9022,
+        "cw_acc_hard": 0.9592,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 26,
+        "n_hard": 361,
+        "ew_acc_hard": 0.9086,
+        "cw_acc_hard": 0.9335,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 27,
+        "n_hard": 372,
+        "ew_acc_hard": 0.8978,
+        "cw_acc_hard": 0.9462,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 28,
+        "n_hard": 381,
+        "ew_acc_hard": 0.9134,
+        "cw_acc_hard": 0.9449,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 29,
+        "n_hard": 370,
+        "ew_acc_hard": 0.9162,
+        "cw_acc_hard": 0.9378,
+        "oracle_acc_hard": 1.0
+      }
+    ],
+    "mean_gap_oracle_minus_ew": 0.0963,
+    "mean_gap_oracle_minus_cw": 0.0545,
+    "n_seeds_oracle_beats_ew": 30,
+    "n_seeds_oracle_beats_cw": 30,
+    "wilcoxon_oracle_vs_ew": {
+      "statistic": 0.0,
+      "p_value": 0.0
+    },
+    "wilcoxon_oracle_vs_cw": {
+      "statistic": 0.0,
+      "p_value": 0.0
+    }
+  },
+  "domain_two_it_incidents": {
+    "domain": "domain_two_it_incidents",
+    "n_seeds": 30,
+    "per_seed": [
+      {
+        "seed": 0,
+        "n_hard": 374,
+        "ew_acc_hard": 0.9064,
+        "cw_acc_hard": 0.9652,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 1,
+        "n_hard": 387,
+        "ew_acc_hard": 0.9509,
+        "cw_acc_hard": 0.9767,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 2,
+        "n_hard": 375,
+        "ew_acc_hard": 0.936,
+        "cw_acc_hard": 0.9653,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 3,
+        "n_hard": 368,
+        "ew_acc_hard": 0.9293,
+        "cw_acc_hard": 0.9674,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 4,
+        "n_hard": 381,
+        "ew_acc_hard": 0.9291,
+        "cw_acc_hard": 0.9764,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 5,
+        "n_hard": 374,
+        "ew_acc_hard": 0.9412,
+        "cw_acc_hard": 0.9626,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 6,
+        "n_hard": 375,
+        "ew_acc_hard": 0.9253,
+        "cw_acc_hard": 0.9653,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 7,
+        "n_hard": 383,
+        "ew_acc_hard": 0.9243,
+        "cw_acc_hard": 0.9608,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 8,
+        "n_hard": 375,
+        "ew_acc_hard": 0.952,
+        "cw_acc_hard": 0.9653,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 9,
+        "n_hard": 380,
+        "ew_acc_hard": 0.9263,
+        "cw_acc_hard": 0.9658,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 10,
+        "n_hard": 382,
+        "ew_acc_hard": 0.9503,
+        "cw_acc_hard": 0.9791,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 11,
+        "n_hard": 369,
+        "ew_acc_hard": 0.9322,
+        "cw_acc_hard": 0.9756,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 12,
+        "n_hard": 376,
+        "ew_acc_hard": 0.9388,
+        "cw_acc_hard": 0.9814,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 13,
+        "n_hard": 360,
+        "ew_acc_hard": 0.9528,
+        "cw_acc_hard": 0.9694,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 14,
+        "n_hard": 372,
+        "ew_acc_hard": 0.9301,
+        "cw_acc_hard": 0.9731,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 15,
+        "n_hard": 374,
+        "ew_acc_hard": 0.9305,
+        "cw_acc_hard": 0.9813,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 16,
+        "n_hard": 376,
+        "ew_acc_hard": 0.9468,
+        "cw_acc_hard": 0.984,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 17,
+        "n_hard": 349,
+        "ew_acc_hard": 0.9456,
+        "cw_acc_hard": 0.9713,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 18,
+        "n_hard": 375,
+        "ew_acc_hard": 0.9307,
+        "cw_acc_hard": 0.9627,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 19,
+        "n_hard": 368,
+        "ew_acc_hard": 0.9484,
+        "cw_acc_hard": 0.981,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 20,
+        "n_hard": 389,
+        "ew_acc_hard": 0.9512,
+        "cw_acc_hard": 0.982,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 21,
+        "n_hard": 380,
+        "ew_acc_hard": 0.9342,
+        "cw_acc_hard": 0.9763,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 22,
+        "n_hard": 355,
+        "ew_acc_hard": 0.9408,
+        "cw_acc_hard": 0.9803,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 23,
+        "n_hard": 373,
+        "ew_acc_hard": 0.9678,
+        "cw_acc_hard": 0.9839,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 24,
+        "n_hard": 376,
+        "ew_acc_hard": 0.9176,
+        "cw_acc_hard": 0.9707,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 25,
+        "n_hard": 368,
+        "ew_acc_hard": 0.9348,
+        "cw_acc_hard": 0.9783,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 26,
+        "n_hard": 361,
+        "ew_acc_hard": 0.9391,
+        "cw_acc_hard": 0.9723,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 27,
+        "n_hard": 372,
+        "ew_acc_hard": 0.9516,
+        "cw_acc_hard": 0.9785,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 28,
+        "n_hard": 381,
+        "ew_acc_hard": 0.9528,
+        "cw_acc_hard": 0.9764,
+        "oracle_acc_hard": 1.0
+      },
+      {
+        "seed": 29,
+        "n_hard": 370,
+        "ew_acc_hard": 0.9297,
+        "cw_acc_hard": 0.9622,
+        "oracle_acc_hard": 1.0
+      }
+    ],
+    "mean_gap_oracle_minus_ew": 0.0618,
+    "mean_gap_oracle_minus_cw": 0.027,
+    "n_seeds_oracle_beats_ew": 30,
+    "n_seeds_oracle_beats_cw": 30,
+    "wilcoxon_oracle_vs_ew": {
+      "statistic": 0.0,
+      "p_value": 0.0
+    },
+    "wilcoxon_oracle_vs_cw": {
+      "statistic": 0.0,
+      "p_value": 0.0
+    }
+  }
+}

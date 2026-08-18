@@ -24,7 +24,23 @@ end-to-end via the weighted-sum fused distribution's cross-entropy loss
 against the true label, rather than hand-specified as confidence^p. This
 tests whether a learned weighting function of confidence beats this
 paper's swept-but-fixed power=3 rule (Eq.~\ref{eq:fusion}) -- a form of
-learned attention over modality confidence, not a fixed formula."""
+learned attention over modality confidence, not a fixed formula.
+
+RichGatingFusion: the same gating architecture and training objective as
+LearnedGatingFusion, but the gate is a function of a richer per-modality
+feature vector -- [confidence, OOD-distance trust score (see
+framework/ood_calibration.py), prediction entropy, cross-modality
+disagreement] -- instead of confidence alone. Motivated by a specific
+negative result on the public-CrisisMMD domain
+(experiments/public_crisismmd/ood_recalibration_experiment.py and
+ood_recalibration_tuned.py): neither raw confidence nor OOD-distance trust
+is individually a reliable per-example signal of which modality is
+actually more accurate in every case, but a per-example diagnostic showed
+real, exploitable reliability gaps exist (e.g. a 15.6-point accuracy gap
+between modalities when text is degraded). Rather than hand-designing
+another formula over these signals -- which already failed twice -- this
+lets a trained gate discover how to combine multiple partially-informative
+signals, none of which is individually trustworthy on its own."""
 import numpy as np
 import torch
 import torch.nn as nn
@@ -133,6 +149,99 @@ class LearnedGatingFusion:
         best_idx = int(np.argmax(fused))
         return {
             "modality": "learned_gating_fusion",
+            "label": self.labels_[best_idx],
+            "confidence": float(fused[best_idx]),
+            "probs": {l: float(p) for l, p in zip(self.labels_, fused)},
+        }
+
+
+def _entropy(probs_dict):
+    p = np.array(list(probs_dict.values()))
+    p = np.clip(p, 1e-12, 1.0)
+    h = -np.sum(p * np.log(p))
+    return float(h / np.log(len(p)))  # normalized to [0, 1]
+
+
+def _rich_features(modality_results):
+    """Per-modality [confidence, ood_trust, entropy, disagreement]. ood_trust
+    must already be attached to each modality result dict (as "ood_trust") by
+    the caller, e.g. via OODConfidenceRecalibrator.trust_scores -- this class
+    only consumes the signal, it does not compute it, keeping OOD calibration
+    and fusion decoupled. Disagreement is a single example-level scalar (1.0
+    if the modalities' predicted labels differ, else 0.0), broadcast into
+    every modality's feature row since the gate's input is per-modality."""
+    labels = [r["label"] for r in modality_results]
+    disagreement = 1.0 if len(set(labels)) > 1 else 0.0
+    return np.array([
+        [r["confidence"], r.get("ood_trust", 1.0), _entropy(r["probs"]), disagreement]
+        for r in modality_results
+    ])
+
+
+class _RichGateNet(nn.Module):
+    def __init__(self, n_modalities, n_features, hidden=8):
+        super().__init__()
+        self.n_modalities = n_modalities
+        self.net = nn.Sequential(nn.Linear(n_modalities * n_features, hidden), nn.ReLU(),
+                                  nn.Linear(hidden, n_modalities))
+
+    def forward(self, feats):
+        return torch.softmax(self.net(feats.flatten(start_dim=1)), dim=-1)
+
+
+class RichGatingFusion:
+    """Same gating mechanism and training objective as LearnedGatingFusion,
+    but the gate is a function of [confidence, ood_trust, entropy,
+    disagreement] per modality instead of confidence alone -- see module
+    docstring for the negative result that motivates this."""
+
+    def __init__(self, epochs=300, lr=0.01, seed=42, hidden=8):
+        self.epochs = epochs
+        self.lr = lr
+        self.seed = seed
+        self.hidden = hidden
+        self.labels_ = None
+        self.model = None
+        self._fitted = False
+
+    def fit(self, oof_modality_results_list, y):
+        torch.manual_seed(self.seed)
+        self.labels_ = _labels_of(oof_modality_results_list[0])
+        label_to_idx = {l: i for i, l in enumerate(self.labels_)}
+
+        feats = torch.tensor(np.array([_rich_features(mr) for mr in oof_modality_results_list]),
+                              dtype=torch.float32)
+        probs = torch.tensor(np.array([[[r["probs"][l] for l in self.labels_] for r in mr]
+                                        for mr in oof_modality_results_list]), dtype=torch.float32)
+        y_idx = torch.tensor([label_to_idx[l] for l in y], dtype=torch.long)
+
+        counts = torch.bincount(y_idx, minlength=len(self.labels_)).float()
+        class_weights = counts.sum() / (len(self.labels_) * counts.clamp(min=1))
+
+        self.model = _RichGateNet(n_modalities=feats.shape[1], n_features=feats.shape[2], hidden=self.hidden)
+        opt = torch.optim.Adam(self.model.parameters(), lr=self.lr)
+        loss_fn = nn.NLLLoss(weight=class_weights)
+        for _ in range(self.epochs):
+            opt.zero_grad()
+            weights = self.model(feats)
+            fused = torch.einsum("nm,nmc->nc", weights, probs)
+            fused = torch.clamp(fused, min=1e-8)
+            loss = loss_fn(torch.log(fused), y_idx)
+            loss.backward()
+            opt.step()
+        self._fitted = True
+
+    def predict(self, modality_results):
+        assert self._fitted, "RichGatingFusion.fit() must be called before predict()"
+        feats = torch.tensor(np.array([_rich_features(modality_results)]), dtype=torch.float32)
+        probs = torch.tensor(np.array([[[r["probs"][l] for l in self.labels_] for r in modality_results]]),
+                              dtype=torch.float32)
+        with torch.no_grad():
+            weights = self.model(feats)
+            fused = torch.einsum("nm,nmc->nc", weights, probs)[0].numpy()
+        best_idx = int(np.argmax(fused))
+        return {
+            "modality": "rich_gating_fusion",
             "label": self.labels_[best_idx],
             "confidence": float(fused[best_idx]),
             "probs": {l: float(p) for l, p in zip(self.labels_, fused)},

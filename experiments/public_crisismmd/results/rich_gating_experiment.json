@@ -1,0 +1,378 @@
+{
+  "meta": {
+    "purpose": "Tests RichGatingFusion (learned gate over confidence, OOD-distance trust, entropy, cross-modality disagreement) against equal-weight, raw confidence-weighted, and existing learned-fusion baselines on real (CrisisMMD) data, after two hand-designed OOD-recalibration formulas both failed.",
+    "n_scenarios": 2986,
+    "seed": 42,
+    "n_seeds_robustness": 30,
+    "methods": [
+      "equal_weight",
+      "confidence_weighted",
+      "stacking",
+      "gating",
+      "rich_gating"
+    ]
+  },
+  "single_split": {
+    "n_test": 1493,
+    "n_hard_subset": 1063,
+    "overall_accuracy": {
+      "equal_weight": 0.6135,
+      "confidence_weighted": 0.6175,
+      "stacking": 0.5747,
+      "gating": 0.572,
+      "rich_gating": 0.574
+    },
+    "hard_subset_accuracy": {
+      "equal_weight": 0.5945,
+      "confidence_weighted": 0.6002,
+      "stacking": 0.5484,
+      "gating": 0.5579,
+      "rich_gating": 0.5663
+    },
+    "hard_subset_mcnemar_rich_gating_vs_equal_weight": {
+      "b": 78,
+      "c": 108,
+      "p_value": 0.033191
+    },
+    "hard_subset_mcnemar_rich_gating_vs_confidence_weighted": {
+      "b": 76,
+      "c": 112,
+      "p_value": 0.010499
+    },
+    "hard_subset_mcnemar_rich_gating_vs_gating": {
+      "b": 53,
+      "c": 44,
+      "p_value": 0.416775
+    },
+    "hard_subset_mcnemar_rich_gating_vs_stacking": {
+      "b": 81,
+      "c": 62,
+      "p_value": 0.131979
+    },
+    "overall_bootstrap_ci": {
+      "equal_weight": {
+        "lo95": 0.5901,
+        "hi95": 0.6383
+      },
+      "confidence_weighted": {
+        "lo95": 0.5934,
+        "hi95": 0.6423
+      },
+      "stacking": {
+        "lo95": 0.5499,
+        "hi95": 0.6001
+      },
+      "gating": {
+        "lo95": 0.5465,
+        "hi95": 0.5981
+      },
+      "rich_gating": {
+        "lo95": 0.5485,
+        "hi95": 0.6008
+      }
+    }
+  },
+  "robustness_multiseed": {
+    "n_seeds": 30,
+    "per_seed": [
+      {
+        "seed": 0,
+        "n_hard": 1072,
+        "equal_weight_acc_hard": 0.6035,
+        "confidence_weighted_acc_hard": 0.6035,
+        "stacking_acc_hard": 0.5466,
+        "gating_acc_hard": 0.5681,
+        "rich_gating_acc_hard": 0.5821
+      },
+      {
+        "seed": 1,
+        "n_hard": 1079,
+        "equal_weight_acc_hard": 0.5829,
+        "confidence_weighted_acc_hard": 0.5774,
+        "stacking_acc_hard": 0.5014,
+        "gating_acc_hard": 0.5551,
+        "rich_gating_acc_hard": 0.544
+      },
+      {
+        "seed": 2,
+        "n_hard": 1063,
+        "equal_weight_acc_hard": 0.6152,
+        "confidence_weighted_acc_hard": 0.6162,
+        "stacking_acc_hard": 0.5804,
+        "gating_acc_hard": 0.6162,
+        "rich_gating_acc_hard": 0.6143
+      },
+      {
+        "seed": 3,
+        "n_hard": 1071,
+        "equal_weight_acc_hard": 0.5929,
+        "confidence_weighted_acc_hard": 0.5864,
+        "stacking_acc_hard": 0.5528,
+        "gating_acc_hard": 0.5742,
+        "rich_gating_acc_hard": 0.5649
+      },
+      {
+        "seed": 4,
+        "n_hard": 1064,
+        "equal_weight_acc_hard": 0.5789,
+        "confidence_weighted_acc_hard": 0.5733,
+        "stacking_acc_hard": 0.5395,
+        "gating_acc_hard": 0.5874,
+        "rich_gating_acc_hard": 0.5808
+      },
+      {
+        "seed": 5,
+        "n_hard": 1071,
+        "equal_weight_acc_hard": 0.5882,
+        "confidence_weighted_acc_hard": 0.5882,
+        "stacking_acc_hard": 0.5472,
+        "gating_acc_hard": 0.563,
+        "rich_gating_acc_hard": 0.5602
+      },
+      {
+        "seed": 6,
+        "n_hard": 1069,
+        "equal_weight_acc_hard": 0.5903,
+        "confidence_weighted_acc_hard": 0.5903,
+        "stacking_acc_hard": 0.5201,
+        "gating_acc_hard": 0.565,
+        "rich_gating_acc_hard": 0.5688
+      },
+      {
+        "seed": 7,
+        "n_hard": 1053,
+        "equal_weight_acc_hard": 0.5859,
+        "confidence_weighted_acc_hard": 0.5859,
+        "stacking_acc_hard": 0.5584,
+        "gating_acc_hard": 0.585,
+        "rich_gating_acc_hard": 0.5793
+      },
+      {
+        "seed": 8,
+        "n_hard": 1070,
+        "equal_weight_acc_hard": 0.615,
+        "confidence_weighted_acc_hard": 0.614,
+        "stacking_acc_hard": 0.5542,
+        "gating_acc_hard": 0.5944,
+        "rich_gating_acc_hard": 0.5925
+      },
+      {
+        "seed": 9,
+        "n_hard": 1060,
+        "equal_weight_acc_hard": 0.5915,
+        "confidence_weighted_acc_hard": 0.5849,
+        "stacking_acc_hard": 0.55,
+        "gating_acc_hard": 0.5642,
+        "rich_gating_acc_hard": 0.5594
+      },
+      {
+        "seed": 10,
+        "n_hard": 1076,
+        "equal_weight_acc_hard": 0.5809,
+        "confidence_weighted_acc_hard": 0.5753,
+        "stacking_acc_hard": 0.5028,
+        "gating_acc_hard": 0.5567,
+        "rich_gating_acc_hard": 0.5678
+      },
+      {
+        "seed": 11,
+        "n_hard": 1093,
+        "equal_weight_acc_hard": 0.6066,
+        "confidence_weighted_acc_hard": 0.6029,
+        "stacking_acc_hard": 0.559,
+        "gating_acc_hard": 0.5416,
+        "rich_gating_acc_hard": 0.5544
+      },
+      {
+        "seed": 12,
+        "n_hard": 1063,
+        "equal_weight_acc_hard": 0.588,
+        "confidence_weighted_acc_hard": 0.5776,
+        "stacking_acc_hard": 0.5155,
+        "gating_acc_hard": 0.5372,
+        "rich_gating_acc_hard": 0.556
+      },
+      {
+        "seed": 13,
+        "n_hard": 1057,
+        "equal_weight_acc_hard": 0.5913,
+        "confidence_weighted_acc_hard": 0.5875,
+        "stacking_acc_hard": 0.5544,
+        "gating_acc_hard": 0.5799,
+        "rich_gating_acc_hard": 0.5771
+      },
+      {
+        "seed": 14,
+        "n_hard": 1057,
+        "equal_weight_acc_hard": 0.5866,
+        "confidence_weighted_acc_hard": 0.5866,
+        "stacking_acc_hard": 0.5317,
+        "gating_acc_hard": 0.5497,
+        "rich_gating_acc_hard": 0.5525
+      },
+      {
+        "seed": 15,
+        "n_hard": 1071,
+        "equal_weight_acc_hard": 0.5948,
+        "confidence_weighted_acc_hard": 0.5854,
+        "stacking_acc_hard": 0.5098,
+        "gating_acc_hard": 0.5742,
+        "rich_gating_acc_hard": 0.5724
+      },
+      {
+        "seed": 16,
+        "n_hard": 1061,
+        "equal_weight_acc_hard": 0.5768,
+        "confidence_weighted_acc_hard": 0.5806,
+        "stacking_acc_hard": 0.5335,
+        "gating_acc_hard": 0.541,
+        "rich_gating_acc_hard": 0.5627
+      },
+      {
+        "seed": 17,
+        "n_hard": 1051,
+        "equal_weight_acc_hard": 0.5842,
+        "confidence_weighted_acc_hard": 0.588,
+        "stacking_acc_hard": 0.5433,
+        "gating_acc_hard": 0.5861,
+        "rich_gating_acc_hard": 0.5595
+      },
+      {
+        "seed": 18,
+        "n_hard": 1070,
+        "equal_weight_acc_hard": 0.5944,
+        "confidence_weighted_acc_hard": 0.5925,
+        "stacking_acc_hard": 0.5495,
+        "gating_acc_hard": 0.5636,
+        "rich_gating_acc_hard": 0.5533
+      },
+      {
+        "seed": 19,
+        "n_hard": 1068,
+        "equal_weight_acc_hard": 0.5768,
+        "confidence_weighted_acc_hard": 0.5758,
+        "stacking_acc_hard": 0.5215,
+        "gating_acc_hard": 0.5571,
+        "rich_gating_acc_hard": 0.5543
+      },
+      {
+        "seed": 20,
+        "n_hard": 1034,
+        "equal_weight_acc_hard": 0.5899,
+        "confidence_weighted_acc_hard": 0.5861,
+        "stacking_acc_hard": 0.5687,
+        "gating_acc_hard": 0.5667,
+        "rich_gating_acc_hard": 0.5658
+      },
+      {
+        "seed": 21,
+        "n_hard": 1047,
+        "equal_weight_acc_hard": 0.5912,
+        "confidence_weighted_acc_hard": 0.5941,
+        "stacking_acc_hard": 0.5578,
+        "gating_acc_hard": 0.5788,
+        "rich_gating_acc_hard": 0.5769
+      },
+      {
+        "seed": 22,
+        "n_hard": 1046,
+        "equal_weight_acc_hard": 0.5793,
+        "confidence_weighted_acc_hard": 0.5765,
+        "stacking_acc_hard": 0.5296,
+        "gating_acc_hard": 0.5421,
+        "rich_gating_acc_hard": 0.5545
+      },
+      {
+        "seed": 23,
+        "n_hard": 1076,
+        "equal_weight_acc_hard": 0.5901,
+        "confidence_weighted_acc_hard": 0.5911,
+        "stacking_acc_hard": 0.5372,
+        "gating_acc_hard": 0.5753,
+        "rich_gating_acc_hard": 0.5864
+      },
+      {
+        "seed": 24,
+        "n_hard": 1064,
+        "equal_weight_acc_hard": 0.594,
+        "confidence_weighted_acc_hard": 0.593,
+        "stacking_acc_hard": 0.5508,
+        "gating_acc_hard": 0.5742,
+        "rich_gating_acc_hard": 0.5808
+      },
+      {
+        "seed": 25,
+        "n_hard": 1059,
+        "equal_weight_acc_hard": 0.5892,
+        "confidence_weighted_acc_hard": 0.5911,
+        "stacking_acc_hard": 0.5581,
+        "gating_acc_hard": 0.5788,
+        "rich_gating_acc_hard": 0.5741
+      },
+      {
+        "seed": 26,
+        "n_hard": 1061,
+        "equal_weight_acc_hard": 0.6277,
+        "confidence_weighted_acc_hard": 0.6258,
+        "stacking_acc_hard": 0.5608,
+        "gating_acc_hard": 0.5928,
+        "rich_gating_acc_hard": 0.5985
+      },
+      {
+        "seed": 27,
+        "n_hard": 1060,
+        "equal_weight_acc_hard": 0.6019,
+        "confidence_weighted_acc_hard": 0.6028,
+        "stacking_acc_hard": 0.5594,
+        "gating_acc_hard": 0.5585,
+        "rich_gating_acc_hard": 0.5906
+      },
+      {
+        "seed": 28,
+        "n_hard": 1062,
+        "equal_weight_acc_hard": 0.6111,
+        "confidence_weighted_acc_hard": 0.6055,
+        "stacking_acc_hard": 0.5367,
+        "gating_acc_hard": 0.5829,
+        "rich_gating_acc_hard": 0.5857
+      },
+      {
+        "seed": 29,
+        "n_hard": 1089,
+        "equal_weight_acc_hard": 0.6006,
+        "confidence_weighted_acc_hard": 0.5969,
+        "stacking_acc_hard": 0.5592,
+        "gating_acc_hard": 0.5831,
+        "rich_gating_acc_hard": 0.5822
+      }
+    ],
+    "vs_equal_weight": {
+      "mean_gap": -0.0216,
+      "n_seeds_rich_gating_wins": 1,
+      "n_seeds_loses": 29,
+      "n_seeds_tied": 0,
+      "wilcoxon_p": 0.0
+    },
+    "vs_confidence_weighted": {
+      "mean_gap": -0.0194,
+      "n_seeds_rich_gating_wins": 1,
+      "n_seeds_loses": 29,
+      "n_seeds_tied": 0,
+      "wilcoxon_p": 0.0
+    },
+    "vs_stacking": {
+      "mean_gap": 0.0287,
+      "n_seeds_rich_gating_wins": 28,
+      "n_seeds_loses": 2,
+      "n_seeds_tied": 0,
+      "wilcoxon_p": 0.0
+    },
+    "vs_gating": {
+      "mean_gap": 0.002,
+      "n_seeds_rich_gating_wins": 13,
+      "n_seeds_loses": 17,
+      "n_seeds_tied": 0,
+      "wilcoxon_p": 0.477106
+    }
+  }
+}
