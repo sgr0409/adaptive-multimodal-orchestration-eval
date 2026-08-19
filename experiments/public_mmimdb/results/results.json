@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "seed": 42,
+    "n_folds": 5,
+    "n_bootstrap": 2000,
+    "domain": "public_mmimdb",
+    "dataset_size": 2516
+  },
+  "dataset": {
+    "n_total": 2516,
+    "n_train": 1258,
+    "n_test": 1258,
+    "n_hard_subset": 867
+  },
+  "equal_weight": {
+    "overall": {
+      "accuracy": 0.8291,
+      "macro_f1": 0.8231,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.8076,
+        "hi95": 0.849
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.8051,
+      "macro_f1": 0.7891,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7785,
+        "hi95": 0.8304
+      }
+    }
+  },
+  "confidence_weighted": {
+    "overall": {
+      "accuracy": 0.8275,
+      "macro_f1": 0.8221,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.8068,
+        "hi95": 0.8474
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.8051,
+      "macro_f1": 0.7905,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7785,
+        "hi95": 0.8304
+      }
+    }
+  },
+  "stacking": {
+    "overall": {
+      "accuracy": 0.8013,
+      "macro_f1": 0.7969,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7798,
+        "hi95": 0.8235
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.7751,
+      "macro_f1": 0.7675,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7474,
+        "hi95": 0.8016
+      }
+    }
+  },
+  "gating": {
+    "overall": {
+      "accuracy": 0.8116,
+      "macro_f1": 0.8003,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7901,
+        "hi95": 0.8323
+      }
+    },
+    "hard_subset": {
+      "accuracy": 0.7866,
+      "macro_f1": 0.7663,
+      "bootstrap_accuracy_ci": {
+        "lo95": 0.7578,
+        "hi95": 0.8131
+      }
+    }
+  },
+  "significance_vs_equal_weight": {
+    "confidence_weighted": {
+      "overall": {
+        "b": 2,
+        "c": 4,
+        "p_value": 0.6875
+      },
+      "hard_subset": {
+        "b": 2,
+        "c": 2,
+        "p_value": 1.0
+      }
+    },
+    "stacking": {
+      "overall": {
+        "b": 66,
+        "c": 101,
+        "p_value": 0.008318
+      },
+      "hard_subset": {
+        "b": 50,
+        "c": 76,
+        "p_value": 0.025543
+      }
+    },
+    "gating": {
+      "overall": {
+        "b": 35,
+        "c": 57,
+        "p_value": 0.028017
+      },
+      "hard_subset": {
+        "b": 26,
+        "c": 42,
+        "p_value": 0.068119
+      }
+    }
+  },
+  "significance_vs_confidence_weighted": {
+    "stacking": {
+      "overall": {
+        "b": 67,
+        "c": 100,
+        "p_value": 0.013041
+      },
+      "hard_subset": {
+        "b": 49,
+        "c": 75,
+        "p_value": 0.02437
+      }
+    },
+    "gating": {
+      "overall": {
+        "b": 38,
+        "c": 58,
+        "p_value": 0.051911
+      },
+      "hard_subset": {
+        "b": 27,
+        "c": 43,
+        "p_value": 0.072238
+      }
+    }
+  },
+  "modality_confidence_reliability_check": {
+    "text": {
+      "mean_confidence_when_degraded": 0.9307,
+      "mean_confidence_when_not_degraded": 0.9468,
+      "n_degraded": 433
+    },
+    "image": {
+      "mean_confidence_when_degraded": 0.887,
+      "mean_confidence_when_not_degraded": 0.9617,
+      "n_degraded": 434
+    }
+  },
+  "confidence_weighted_confusion_matrix": [
+    [
+      510,
+      72,
+      11
+    ],
+    [
+      72,
+      378,
+      15
+    ],
+    [
+      37,
+      10,
+      153
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "Comedy",
+    "Documentary",
+    "Horror"
+  ]
+}

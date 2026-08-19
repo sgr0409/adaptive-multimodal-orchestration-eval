@@ -12,3 +12,11 @@ __pycache__/
 # results, are committed as normal.
 data_public_crisismmd/images/
 data_public_crisismmd/images_degraded/
+
+# Same reasoning for MM-IMDb (Arevalo et al. 2017): raw/ is the ~8.7GB
+# downloaded archive plus its ~17GB extraction (posters + IMDb metadata
+# JSON, third-party content, not ours to republish); images_degraded/ is
+# generated from it. download_dataset.py and generate_dataset.py
+# regenerate both from the public Internet Archive mirror.
+data_public_mmimdb/raw/
+data_public_mmimdb/images_degraded/
