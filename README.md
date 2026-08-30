@@ -1,16 +1,19 @@
 # Adaptive Multimodal Orchestration Evaluation
 
 Evaluation code and released artifacts for the IEEE Access manuscript
-"CAV-Portfolio: Certified Reference-Preserving Selection of Multimodal
-Fusion Policies Under Reliability Shift."
+"Fusion Admission Control: Certified Reference-Preserving Selection of
+Multimodal Policies Under Reliability Shift."
 
 The repository compares equal-weight, confidence-weighted, a naive accuracy
 selector, stacking, learned gating, CAV-Portfolio, and the earlier local
-H-CAV ablation across two generated
-text/image/telemetry domains and two naturally sourced image--text datasets
-with injected corruption (CrisisMMD and MM-IMDb). Random train/test
-partitions are overlapping sensitivity analyses, not independent
-replications.
+H-CAV ablation across two generated text/image/telemetry domains, two
+naturally sourced image--text datasets with injected corruption (CrisisMMD
+and MM-IMDb), and a fifth, naturally sourced three-modality domain with no
+injected corruption (MIntRec2.0, text/audio/video). It also includes
+S-CAVA, an anytime-valid admission controller for continuously arriving
+calibration labels, alongside CAV-Portfolio's fixed-horizon controller.
+Random train/test partitions are overlapping sensitivity analyses, not
+independent replications.
 
 ## CAV-Portfolio architecture
 
@@ -61,6 +64,46 @@ are stored in:
 - `experiments/results/cav_portfolio_independent_calibration.json`
 - `experiments/results/cav_portfolio_evidence_sensitivity.json`
 - `experiments/results/cav_portfolio_certificate_audit.json`
+
+## S-CAVA: anytime fusion admission
+
+`framework/sequential_cav_admission.py` implements an anytime-valid
+alternative to CAV-Portfolio's fixed-horizon certificate for continuously
+arriving calibration labels. For each candidate, a finite mixture of
+likelihood-ratio e-processes over benefit probabilities in `(0.5, 1)` is
+accumulated over decisive paired outcomes only; neutral outcomes leave every
+e-value unchanged. A candidate is admitted the first time its e-value
+crosses `J / alpha` and its path is frozen; this is anytime-valid (safe under
+arbitrary, data-dependent stopping) by Ville's inequality applied to each
+candidate's e-process, with a union bound across candidates.
+
+```bash
+python -m unittest tests/test_sequential_cav_admission.py
+python experiments/sequential_cav_admission_audit.py
+```
+
+The audit artifact `experiments/results/sequential_cav_admission_audit.json`
+records a 12,000-stream randomized-order replay of the strict-profile
+calibration evidence and a 40,000-stream null simulation (20,000 each at two
+horizons) confirming empirical false-admission rates stay under the
+theorem's familywise bound.
+
+## MIntRec2.0: locked natural three-modality validation
+
+`experiments/summarize_mintrec2_features.py` and
+`experiments/cav_portfolio_mintrec2_external.py` evaluate the same fixed
+selector on the official MIntRec2.0 text/audio/video split -- a naturally
+sourced three-modality benchmark with no injected corruption, used to test
+generalization beyond the two-modality natural domains (CrisisMMD,
+MM-IMDb). The protocol (candidate library, `alpha`, minimum decisive count)
+is hashed and locked before development labels certify a path, and test
+labels are read only after both selector fits complete. Official MIntRec2.0
+TSV splits and WavLM/Swin features are not redistributed; obtain them from
+the MIntRec2.0 release.
+
+The complete artifact is
+`experiments/results/cav_portfolio_mintrec2_external.json`; the locked
+protocol hash is `experiments/protocols/mintrec2_external_locked.json`.
 
 ## Earlier H-CAV local ablation
 
