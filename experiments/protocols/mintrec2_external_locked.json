@@ -1,0 +1,21 @@
+{
+  "status": "locked before MIntRec2.0 test-label evaluation",
+  "dataset": "MIntRec2.0 in-scope single-turn",
+  "splits": "official train/dev/test",
+  "task": "30-class intent classification",
+  "modalities": ["text", "audio", "vision"],
+  "reference": "equal_weight",
+  "primary_candidates": [
+    "confidence_weighted_power_3",
+    "stacking",
+    "learned_gating"
+  ],
+  "primary_familywise_error_rate": 0.05,
+  "transfer_confirmatory_candidate": "stacking",
+  "transfer_candidate_rationale": "locked from the positive CMU-MOSEI test gain before reading MIntRec2.0 test labels",
+  "transfer_familywise_error_rate": 0.05,
+  "decision_rule": "CAV paired exact lower accuracy-gain certificate; otherwise equal-weight fallback",
+  "feature_rule": "TF-IDF text; per-sequence mean and standard deviation of official WavLM and Swin features",
+  "training_rule": "dialogue-group-disjoint 80/20 train-only meta-model fit, followed by base-model refit on all training examples",
+  "seed": 42
+}

@@ -1,17 +1,14 @@
-"""Oracle upper-bound check for degradation-aware fusion on MM-IMDb (the
+"""Ground-truth degradation-exclusion diagnostic on MM-IMDb (the
 second real domain), the exact counterpart to
 experiments/public_crisismmd/oracle_ceiling_check.py. See that script's
 docstring for full motivation: the oracle is given ground-truth knowledge
 of which modality is degraded on each example (impossible at real
 deployment time) and hard-selects the other, clean modality's own
-prediction. This establishes the true ceiling for the entire class of
-degradation-aware reweighting mechanisms on this domain, independent of
-how well any estimator predicts degradation -- and, critically, tests
-whether CrisisMMD's finding (the oracle LOSES to equal-weight fusion on
-real data) replicates on a second, independent real dataset, or was a
-property specific to CrisisMMD.
+prediction. This tests the restricted policy that must discard every
+marked modality. It is not a ceiling for soft reweighting, restoration, or
+arbitrary learned fusion because corrupted inputs may retain useful signal.
 
-Single split (seed=42) plus the standard 30-seed robustness check, on the
+Single split (seed=42) plus a 30-partition sensitivity check, on the
 hard (exactly-one-modality-degraded) subset used throughout this domain's
 results.
 """

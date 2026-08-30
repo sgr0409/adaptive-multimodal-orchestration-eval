@@ -1,13 +1,12 @@
-"""Oracle upper-bound check for degradation-aware fusion on CrisisMMD (real
+"""Ground-truth degradation-exclusion diagnostic on CrisisMMD (natural
 data), the counterpart to experiments/oracle_ceiling_check.py's synthetic-
 domain version. See that script's docstring for full motivation: the oracle
 is given ground-truth knowledge of which modality is degraded on each
 example (impossible at real deployment time) and hard-selects the other,
-clean modality's own prediction. This establishes the true ceiling for the
-entire class of degradation-aware reweighting mechanisms -- including all
-three recalibration/gating attempts in ood_recalibration_experiment.py,
-ood_recalibration_tuned.py, and rich_gating_experiment.py -- independent of
-how well any of them estimates degradation.
+clean modality's own prediction. This diagnoses the restricted policy that
+must exclude every modality marked degraded. It is not an upper bound on
+soft reweighting, restoration, or arbitrary learned fusion because a marked
+modality may retain complementary predictive signal.
 
 Single split (seed=42) plus the standard 30-seed robustness check, on the
 hard (exactly-one-modality-degraded) subset used throughout this domain's

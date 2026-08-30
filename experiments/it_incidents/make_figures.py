@@ -102,7 +102,7 @@ def fig_multiseed_robustness(robustness):
     ax.set_xlabel("Equal-weight fusion accuracy (hard subset)")
     ax.set_ylabel("Confidence-weighted fusion accuracy (hard subset)")
     ax.set_title(f"IT-incident domain: CW wins in {robustness['n_seeds_favoring_confidence_weighted']}"
-                 f"/{robustness['n_seeds']} independent splits")
+                 f"/{robustness['n_seeds']} overlapping partitions")
     ax.legend()
     ax.set_aspect("equal")
     save(fig, "multiseed_robustness")

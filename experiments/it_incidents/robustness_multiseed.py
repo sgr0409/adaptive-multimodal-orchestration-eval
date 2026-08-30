@@ -19,6 +19,7 @@ from framework.image_scorer import ImageScorer
 from framework.telemetry_scorer import extract_features as telemetry_features
 
 from framework.fusion import confidence_weighted_fusion, equal_weight_fusion
+from framework.fusion_diagnostics import conflict_activation_value, partition_summary
 
 DATA_DIR = ROOT / "data_it_incidents"
 RESULTS_DIR = ROOT / "experiments" / "it_incidents" / "results"
@@ -61,7 +62,7 @@ def main():
     telemetry_feat = np.array([telemetry_features(r["telemetry"]) for r in scenarios])
 
     n = len(scenarios)
-    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} independent splits...", flush=True)
+    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} overlapping random partitions...", flush=True)
 
     per_seed_results = []
     for seed in range(N_SEEDS):
@@ -83,6 +84,7 @@ def main():
 
         cw_correct_hard, ew_correct_hard = [], []
         cw_correct_all, ew_correct_all = [], []
+        hard_modality_sets, hard_ew_labels, hard_cw_labels, hard_true_labels = [], [], [], []
         for j in range(len(test_idx)):
             mods = [text_res[j], image_res[j], telemetry_res[j]]
             cw = confidence_weighted_fusion(mods, power=FUSION_POWER)["label"]
@@ -93,8 +95,15 @@ def main():
             if deg_test[j] == 2:
                 cw_correct_hard.append(cw_ok)
                 ew_correct_hard.append(ew_ok)
+                hard_modality_sets.append(mods)
+                hard_ew_labels.append(ew)
+                hard_cw_labels.append(cw)
+                hard_true_labels.append(y_test[j])
 
         b, c, p = mcnemar(cw_correct_hard, ew_correct_hard)
+        decomposition = conflict_activation_value(
+            hard_modality_sets, hard_ew_labels, hard_cw_labels, hard_true_labels
+        )
         per_seed_results.append({
             "seed": seed,
             "n_hard": len(cw_correct_hard),
@@ -103,6 +112,7 @@ def main():
             "cw_acc_overall": round(sum(cw_correct_all) / len(cw_correct_all), 4),
             "ew_acc_overall": round(sum(ew_correct_all) / len(ew_correct_all), 4),
             "mcnemar_b": b, "mcnemar_c": c, "mcnemar_p": round(p, 6),
+            "conflict_activation_value": decomposition,
         })
         print(f"seed={seed:2d}  cw_hard={per_seed_results[-1]['cw_acc_hard']:.4f}  "
               f"ew_hard={per_seed_results[-1]['ew_acc_hard']:.4f}  "
@@ -135,6 +145,9 @@ def main():
         "n_seeds_favoring_equal_weight": n_favor_ew,
         "n_seeds_tied": n_tied,
         "n_seeds_individually_significant_p_lt_05": n_significant,
+        "conflict_activation_value_descriptive": partition_summary(
+            [r["conflict_activation_value"] for r in per_seed_results]
+        ),
         "pooled_mcnemar_across_all_seeds": {
             "total_b_cw_right_ew_wrong": total_b,
             "total_c_cw_wrong_ew_right": total_c,

@@ -6,8 +6,10 @@ fixed train/test split (seed=42): p=0.0525 on the two-degraded-modality
 subset, just above the conventional 0.05 threshold. That is not enough
 evidence on its own that the effect is real rather than a property of one
 particular split -- this script re-runs the same comparison across many
-independent random splits of the same underlying 1500 scenarios and
-reports the distribution of outcomes, not just a second point estimate.
+random splits of the same underlying 1500 scenarios and
+reports the distribution of outcomes as a sensitivity analysis, not as
+independent replication: the random partitions overlap because they reuse
+the same finite scenario pool.
 
 Expensive model forward passes (MiniLM text embeddings, CLIP image
 embeddings) are computed once for the full dataset up front, since they
@@ -33,6 +35,7 @@ from framework.text_scorer import TextScorer
 from framework.image_scorer import ImageScorer
 from framework.telemetry_scorer import extract_features as telemetry_features
 from framework.fusion import confidence_weighted_fusion, equal_weight_fusion, LABELS
+from framework.fusion_diagnostics import conflict_activation_value, partition_summary
 
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "experiments" / "results"
@@ -75,7 +78,7 @@ def main():
     telemetry_feat = np.array([telemetry_features(r["telemetry"]) for r in scenarios])
 
     n = len(scenarios)
-    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} independent splits...", flush=True)
+    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} overlapping random partitions...", flush=True)
 
     per_seed_results = []
     for seed in range(N_SEEDS):
@@ -97,6 +100,7 @@ def main():
 
         cw_correct_hard, ew_correct_hard = [], []
         cw_correct_all, ew_correct_all = [], []
+        hard_modality_sets, hard_ew_labels, hard_cw_labels, hard_true_labels = [], [], [], []
         for j in range(len(test_idx)):
             mods = [text_res[j], image_res[j], telemetry_res[j]]
             cw = confidence_weighted_fusion(mods, power=FUSION_POWER)["label"]
@@ -107,8 +111,15 @@ def main():
             if deg_test[j] == 2:
                 cw_correct_hard.append(cw_ok)
                 ew_correct_hard.append(ew_ok)
+                hard_modality_sets.append(mods)
+                hard_ew_labels.append(ew)
+                hard_cw_labels.append(cw)
+                hard_true_labels.append(y_test[j])
 
         b, c, p = mcnemar(cw_correct_hard, ew_correct_hard)
+        decomposition = conflict_activation_value(
+            hard_modality_sets, hard_ew_labels, hard_cw_labels, hard_true_labels
+        )
         per_seed_results.append({
             "seed": seed,
             "n_hard": len(cw_correct_hard),
@@ -117,6 +128,7 @@ def main():
             "cw_acc_overall": round(sum(cw_correct_all) / len(cw_correct_all), 4),
             "ew_acc_overall": round(sum(ew_correct_all) / len(ew_correct_all), 4),
             "mcnemar_b": b, "mcnemar_c": c, "mcnemar_p": round(p, 6),
+            "conflict_activation_value": decomposition,
         })
         print(f"seed={seed:2d}  cw_hard={per_seed_results[-1]['cw_acc_hard']:.4f}  "
               f"ew_hard={per_seed_results[-1]['ew_acc_hard']:.4f}  "
@@ -129,17 +141,17 @@ def main():
     n_tied = sum(1 for g in gaps if g == 0)
     n_significant = sum(1 for r in per_seed_results if r["mcnemar_p"] < 0.05)
 
-    # Pooled McNemar across all seeds' discordant pairs -- a higher-powered
-    # single test on the combined evidence, not just counting how many
-    # per-seed tests individually crossed 0.05.
+    # Retained for backward compatibility with earlier result artifacts.
+    # This pooled value is not valid for inference because examples recur
+    # across overlapping partitions; the paper does not report it.
     total_b = sum(r["mcnemar_b"] for r in per_seed_results)
     total_c = sum(r["mcnemar_c"] for r in per_seed_results)
     pooled_n = total_b + total_c
     pooled_p = scipy_stats.binomtest(min(total_b, total_c), pooled_n, 0.5).pvalue if pooled_n > 0 else 1.0
 
-    # Wilcoxon signed-rank test on the per-seed accuracy gap itself:
-    # treats each seed's gap as one paired observation, independent of the
-    # per-seed McNemar significance.
+    # Retained for backward compatibility only. Partition gaps are dependent
+    # because the underlying examples recur; the paper does not report this
+    # value as inferential evidence.
     try:
         wilcoxon_stat, wilcoxon_p = scipy_stats.wilcoxon(gaps)
     except ValueError:
@@ -155,6 +167,9 @@ def main():
         "n_seeds_favoring_equal_weight": n_favor_ew,
         "n_seeds_tied": n_tied,
         "n_seeds_individually_significant_p_lt_05": n_significant,
+        "conflict_activation_value_descriptive": partition_summary(
+            [r["conflict_activation_value"] for r in per_seed_results]
+        ),
         "pooled_mcnemar_across_all_seeds": {
             "total_b_cw_right_ew_wrong": total_b,
             "total_c_cw_wrong_ew_right": total_c,

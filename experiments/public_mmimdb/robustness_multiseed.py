@@ -2,8 +2,9 @@
 methodology to experiments/public_crisismmd/robustness_multiseed.py and
 experiments/robustness_multiseed.py (see those files' docstrings): a
 single train/test split is not enough evidence for any fusion comparison
-in this paper, so every domain gets the same 30-independent-split check
-before any conclusion is drawn from it.
+in this paper, so every domain gets the same 30-partition sensitivity
+analysis before any conclusion is drawn from it. These partitions overlap
+and are not treated as independent replications.
 
 Embeddings for the full pool are computed once; only the lightweight
 per-modality logistic-regression heads and the two fusion meta-learners
@@ -28,6 +29,7 @@ from framework.text_scorer import TextScorer
 from framework.image_scorer import ImageScorer
 from framework.fusion import confidence_weighted_fusion, equal_weight_fusion
 from framework.learned_fusion import StackingFusion, LearnedGatingFusion
+from framework.fusion_diagnostics import conflict_activation_value, partition_summary
 
 DATA_DIR = ROOT / "data_public_mmimdb"
 RESULTS_DIR = ROOT / "experiments" / "public_mmimdb" / "results"
@@ -67,7 +69,7 @@ def main():
     image_emb = image_embedder.embed([str(DATA_DIR / r["image_path"]) for r in scenarios])
 
     n = len(scenarios)
-    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} independent splits...", flush=True)
+    print(f"Embeddings ready for {n} scenarios. Running {N_SEEDS} overlapping random partitions...", flush=True)
 
     per_seed_results = []
     for seed in range(N_SEEDS):
@@ -101,6 +103,7 @@ def main():
         gating.fit(oof_mods, y_train)
 
         ew_correct, cw_correct, st_correct, gt_correct = [], [], [], []
+        modality_sets, ew_labels, cw_labels = [], [], []
         for j in range(len(test_idx)):
             mods = [text_test[j], image_test[j]]
             ew = equal_weight_fusion(mods)["label"]
@@ -111,8 +114,14 @@ def main():
             cw_correct.append(cw == y_test[j])
             st_correct.append(st == y_test[j])
             gt_correct.append(gt == y_test[j])
+            modality_sets.append(mods)
+            ew_labels.append(ew)
+            cw_labels.append(cw)
 
         b, c, p = mcnemar(cw_correct, ew_correct)
+        decomposition = conflict_activation_value(
+            modality_sets, ew_labels, cw_labels, y_test
+        )
         per_seed_results.append({
             "seed": seed,
             "ew_acc": round(sum(ew_correct) / len(ew_correct), 4),
@@ -120,6 +129,7 @@ def main():
             "stacking_acc": round(sum(st_correct) / len(st_correct), 4),
             "gating_acc": round(sum(gt_correct) / len(gt_correct), 4),
             "cw_vs_ew_mcnemar_b": b, "cw_vs_ew_mcnemar_c": c, "cw_vs_ew_mcnemar_p": round(p, 6),
+            "conflict_activation_value": decomposition,
         })
         print(f"seed={seed:2d}  ew={per_seed_results[-1]['ew_acc']:.4f}  cw={per_seed_results[-1]['cw_acc']:.4f}  "
               f"stacking={per_seed_results[-1]['stacking_acc']:.4f}  gating={per_seed_results[-1]['gating_acc']:.4f}  "
@@ -153,6 +163,9 @@ def main():
         "n_seeds_favoring_equal_weight": n_favor_ew,
         "n_seeds_tied": n_tied,
         "n_seeds_individually_significant_p_lt_05": n_significant,
+        "conflict_activation_value_descriptive": partition_summary(
+            [r["conflict_activation_value"] for r in per_seed_results]
+        ),
         "pooled_mcnemar_across_all_seeds": {"total_b": total_b, "total_c": total_c, "p_value": round(float(pooled_p), 8)},
         "wilcoxon_signed_rank_on_per_seed_gap": {
             "statistic": float(wilcoxon_stat) if wilcoxon_stat is not None else None,

@@ -1,0 +1,43 @@
+{
+  "method": "CAV-Portfolio strict gain-certificate audit",
+  "selection_uses_test_labels": false,
+  "familywise_error_rate": 0.05,
+  "domains": {
+    "domain1": {
+      "partitions": 30,
+      "cav_nonreference_certificates": 30,
+      "generic_hoeffding_nonreference_certificates": 0,
+      "mean_selected_gain_lower_bound": 0.018610932970101614,
+      "mean_selected_total_variation_radius": 0.009305466485050807,
+      "minimum_positive_total_variation_radius": 0.0006197377683865758,
+      "maximum_total_variation_radius": 0.017112482872256
+    },
+    "domain2": {
+      "partitions": 30,
+      "cav_nonreference_certificates": 30,
+      "generic_hoeffding_nonreference_certificates": 0,
+      "mean_selected_gain_lower_bound": 0.007732995423420667,
+      "mean_selected_total_variation_radius": 0.0038664977117103335,
+      "minimum_positive_total_variation_radius": 0.0006647648809401682,
+      "maximum_total_variation_radius": 0.01224693682174014
+    },
+    "crisismmd": {
+      "partitions": 30,
+      "cav_nonreference_certificates": 0,
+      "generic_hoeffding_nonreference_certificates": 0,
+      "mean_selected_gain_lower_bound": 0.0,
+      "mean_selected_total_variation_radius": 0.0,
+      "minimum_positive_total_variation_radius": 0.0,
+      "maximum_total_variation_radius": 0.0
+    },
+    "mmimdb": {
+      "partitions": 30,
+      "cav_nonreference_certificates": 0,
+      "generic_hoeffding_nonreference_certificates": 0,
+      "mean_selected_gain_lower_bound": 0.0,
+      "mean_selected_total_variation_radius": 0.0,
+      "minimum_positive_total_variation_radius": 0.0,
+      "maximum_total_variation_radius": 0.0
+    }
+  }
+}

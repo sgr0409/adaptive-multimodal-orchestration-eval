@@ -1,14 +1,12 @@
-"""Oracle upper-bound check for confidence-aware fusion, run on both
-synthetic domains to contrast with the same check on public CrisisMMD
-(real data), where it produced the paper's key new finding: an oracle given
-ground-truth knowledge of which modality is degraded on each example still
-LOSES to equal-weight and confidence-weighted fusion (29/30 and 27/30
-seeds respectively, p<0.000001), proving degradation status and per-example
-predictive correctness are only weakly coupled on real data -- so no
-degradation-aware reweighting mechanism (hand-designed or learned) could
-ever have closed that gap, however well implemented.
+"""Ground-truth degradation-exclusion diagnostic on both generated domains.
 
-This script asks the natural follow-up: does the same ceiling effect hold
+The policy discards every marked modality. It diagnoses mandatory hard
+exclusion, not soft reweighting or arbitrary learned fusion. A negative
+gap on naturally sourced data therefore shows that corruption status is
+not equivalent to correctness; it does not prove that all adaptive fusion
+mechanisms must fail.
+
+This script asks the natural follow-up: does the same exclusion pattern hold
 on the synthetic domains, where confidence-weighted fusion's advantage over
 equal-weight is real and well-established (30-seed robustness check,
 sec:results)? If the oracle clearly beats both baselines on synthetic data
