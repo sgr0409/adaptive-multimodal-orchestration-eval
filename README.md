@@ -203,3 +203,7 @@ Dataset preparation and domain-specific experiments live under `data*/` and
 
 The companion paper source is in the `adaptive-multimodal-orchestration/`
 module of the `ai-spm-guardrail-paper` repository.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
